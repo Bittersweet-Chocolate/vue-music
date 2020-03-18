@@ -1,32 +1,28 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import playSong from '@/views/playSong'
-import playVide from '@/views/playVide'
-import logger from 'vuex/dist/logger'
+import Home from '@/views/Home.vue'
+import Rank from '@/views/Rank.vue'
+import Main from '@/views/Main.vue'
 Vue.use(VueRouter)
 
 const routes = [{
-  path: '/playsong/:id',
-  name: 'playsong',
-  component: playSong
-}, {
   path: '/',
-  redirect: '/playsong/1'
-}, {
-  path: '/playvide/:id',
-  name: 'playvide',
-  component: playVide
-}, {
-  path: '*',
-  redirect: '/playsong/1'
+  component: Main,
+  children: [{
+    path: '/',
+    name: 'Home',
+    component: Home
+  }, {
+    path: '/rank',
+    name: 'rank',
+    component: Rank
+  }]
 }]
 
 const router = new VueRouter({
-  mode: 'hash',
+  mode: 'history',
   // base: process.env.BASE_URL,
-  routes,
-  // vuex中打印日志的方法
-  plugins: [logger()]
+  routes
 })
 
 export default router
