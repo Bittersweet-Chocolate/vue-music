@@ -17,10 +17,13 @@ const routes = [{
     name: 'rank',
     component: Rank
   }]
+}, {
+  path: '*',
+  redirect: '/'
 }]
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: 'hash',
   // base: process.env.BASE_URL,
   routes
 })

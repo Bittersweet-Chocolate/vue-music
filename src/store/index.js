@@ -13,7 +13,10 @@ export default new Vuex.Store({
   mutations: {
     // 获取推荐列表数据
     getHomeListMutation(state, data) {
-      state.homeList = data.MusicHallHomePage.data.v_shelf
+      state.homeList = data.data.v_shelf
+    },
+    getHotListMutation(state, data) {
+      state.hotList = data.data.track_info
     }
   },
   actions: {
@@ -25,7 +28,8 @@ export default new Vuex.Store({
         url: api.HOMELIST,
         methods: 'get'
       }).then(val => {
-        commit('getHomeListMutation', val.data)
+        commit('getHomeListMutation', val.data.MusicHallHomePage);
+        commit('getHotListMutation', val.data.hotkey);
       })
     }
   },

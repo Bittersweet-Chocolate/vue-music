@@ -20,8 +20,8 @@
       </div>
       <!-- tab栏 -->
       <div class="nav d-flex fs-lg text-grey text-center ">
-        <router-link  tag="div" to="/" active-class="active">推荐</router-link>
-        <router-link  tag="div" to="/rank" active-class="active" >排行</router-link>
+        <router-link  tag="div" to="/" exact-active-class="active">推荐</router-link>
+        <router-link  tag="div" to="/rank" exact-active-class="active" >排行</router-link>
       </div>
     </div>
     <!-- 路由占位符 使用过渡效果 -->
