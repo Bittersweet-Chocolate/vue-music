@@ -1,24 +1,16 @@
 # vue-music
 
-## Project setup
+## 项目描述
+基于[NeteaseCloudMusicApi](https://binaryify.github.io/NeteaseCloudMusicApi/#/)服务开发
+
+### 项目技术
 ```
-npm install
+vue,vuex,vueRoter,scss,axios
 ```
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### 运行项目
+1. 首先需要开启网易云音乐API服务,请先下载[NeteaseCloudMusicApi](https://github.com/Binaryify/NeteaseCloudMusicApi)并开启服务
+2. 打开本项目 `npm install`
+3. 运行服务 `npm run serve`
+4. 访问 `localhost:8080` 查看服务
