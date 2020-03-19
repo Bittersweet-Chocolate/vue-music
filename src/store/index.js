@@ -1,35 +1,31 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import api from '@/api/index'
 import axios from 'axios'
+import {
+  USERS
+} from '@/api/index'
+
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    musicList: [],
-    hotList: [],
-    homeList: []
+    userInfo: {}
   },
   mutations: {
-    // 获取推荐列表数据
-    getHomeListMutation(state, data) {
-      state.homeList = data.data.v_shelf
-    },
-    getHotListMutation(state, data) {
-      state.hotList = data.data.track_info
+    getUserInfoMutaion(state, data) {
+      state.userInfo = data
     }
   },
   actions: {
-    // 解构赋值牛逼
-    getHomeListAction({
+    // // 解构赋值牛逼
+    getUserInfoAction({
       commit
-    }) {
+    }, value) {
       axios({
-        url: api.HOMELIST,
+        url: USERS.url + `?uid=${value}`,
         methods: 'get'
       }).then(val => {
-        commit('getHomeListMutation', val.data.MusicHallHomePage);
-        commit('getHotListMutation', val.data.hotkey);
+        commit('getUserInfoMutaion', val)
       })
     }
   },

@@ -125,7 +125,12 @@ $flex-ai:(
 .flex-1 {
   flex: 1;
 }
-
+.flex-right{
+  justify-content:flex-end
+}
+.flex-left{
+  justify-content:flex-start
+}
 .flex-wrap {
   flex-wrap: wrap;
 }

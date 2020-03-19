@@ -19,7 +19,7 @@
             class="bg-white px-2 mr-2 py-1 mb-3 fs-sm text-grey"
             v-for="(item,index) in hotList"
             :key="index"
-          >{{item.album.name}}</a>
+          >{{item.first}}</a>
         </div>
       </div>
     </section>
@@ -53,31 +53,36 @@
   </div>
 </template>
 <script>
-import { mapState } from "vuex";
+import { HOT } from "@/api/index";
 export default {
   data() {
     return {
       isSearch: false,
-      searchWidth: "w-100"
+      searchWidth: "w-100",
+      hotList: [],
+      homeList: []
     };
   },
   methods: {
-    search(){
-
-    },
-    musicPlay() {}
+    async searchHot() {
+      try {
+        const { result } = await this.$axios({
+          methods: HOT.type,
+          url: HOT.url
+        });
+        this.hotList = result.hots;
+      } catch (e) {
+        console.log(e);
+      }
+    }
   },
   created() {
-    // 请求歌单
-    this.$store.dispatch("getHomeListAction");
+    this.searchHot();
   },
-  computed: {
-    // 添加 歌单列表，歌曲列表，热门搜索
-    ...mapState(["musicList", "hotList", "homeList"])
-  },
+  computed: {},
   filters: {
     localWan(val) {
-      if (10000 < val < 1000000) return Math.round(val / 10000) + "万";
+      if (10000 < val < 1000000) return (val / 10000).toFixed(2) + "万";
     }
   }
 };
