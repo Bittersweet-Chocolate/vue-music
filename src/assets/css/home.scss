@@ -4,26 +4,50 @@
   border-radius: 15px;
   font-size: 15px;
   outline: none;
+
+  //首行缩进
+  // text-indent:35px;
   &.active {
     width: 80%;
   }
+
 }
 
+
+
 .sea {
-  position: relative;
+  display: -webkit-box;
+  div{
+    -webkit-box-flex: 1;
+  }
+  span{
+    height: 4rem;
+    line-height: 2.2rem;
+  }
 }
-.pos {
+
+.pos-center {
   position: absolute;
-  top: 20px;
-  left: 30px;
+  top: 8.8rem;
+  left: 50%;
+  margin-left: -3rem;
 }
+
+.pos-left {
+  position: absolute;
+  top: 8.8rem;
+  left: 2rem;
+}
+
 .song-list-box {
   height: 7.6923rem;
   width: 7.6923rem;
   position: relative;
+
   img {
     height: 100%;
   }
+
   .song-list-info {
     position: absolute;
     bottom: 0;
@@ -32,32 +56,39 @@
     background-color: rgba(0, 0, 0, 0.4);
   }
 }
+
 .divisionBox {
-  width: 215px ;
+  width: 215px;
   height: 125px;
 }
+
 .song-list {
   overflow-x: scroll;
   /* 解决ios手机页面滑动卡顿问题 */
   -webkit-overflow-scrolling: touch;
 }
+
 .removeScroll {
   overflow: hidden;
   height: 10.3846rem;
 }
+
 .song-list-item img {
   border-radius: 10px;
 }
+
 .searchBox {
   position: absolute;
   height: 500px;
-  width: 100%;
+  // width: 100%;
   background-color: #fafafa;
   z-index: 99;
 }
+
 .hot a {
   border-radius: 20px;
 }
+
 .fot {
-  height:22px ;
+  height: 22px;
 }

@@ -14,7 +14,7 @@
 </template>
 <script>
 import { LBP } from "@/api/index";
-import { Indicator } from 'mint-ui';
+import { Indicator, Toast } from "mint-ui";
 export default {
   data() {
     return {
@@ -24,16 +24,30 @@ export default {
   },
   methods: {
     async Login() {
-      Indicator.open('登陆中...');
+      Indicator.open("登陆中...");
       try {
-        const { account } = await this.$axios({
+        const { account, code, message } = await this.$axios({
           methods: LBP.type,
           url: LBP.url + `?phone=${this.phone}&password=${this.password}`
         });
-        this.$store.dispatch("getUserInfoAction",account.id)
         Indicator.close();
+        if (code !== 200) {
+          Toast({
+            message: message,
+            position: "center",
+            duration: 2000
+          });
+          return;
+        }
+        this.$store.dispatch("getUserInfoAction", account.id);
         this.$router.push({ path: "/" });
       } catch (e) {
+        Indicator.close();
+        Toast({
+            message: "未知错误",
+            position: "center",
+            duration: 2000
+          });
         console.log(e);
       }
     },

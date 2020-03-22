@@ -23,7 +23,7 @@
           
         </div>
         <div v-else class="flex-1 flex-right d-flex" >
-          <img  :src="userInfo.profile.avatarUrl"  width="30%">
+          <img  :src="userInfo.profile.avatarUrl"  width="23%">
         </div>
       </div>
       <!-- tab栏 -->
@@ -33,9 +33,13 @@
       </div>
     </div>
     <!-- 路由占位符 使用过渡效果 -->
+    
     <transition mode="out-in">
+      <keep-alive>
       <router-view />
+      </keep-alive>
     </transition>
+    
 
     <!-- 底部 -->
     <footer class="d-flex flex-column ai-center mt-5">
