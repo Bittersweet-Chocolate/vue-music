@@ -1,12 +1,14 @@
 import axios from 'axios'
 import qs from 'qs'
-axios.defaults.baseURL = 'http://localhost:3000'
+axios.defaults.baseURL = 'http://musicapi.leanapp.cn'
 axios.defaults.timeoute = 10000
 // 允许携带cookie 凭证
 axios.defaults.withCredentials = true
 /*
+  解决axios检查是否跨域发送两次请求问题
   设置请求传递数据的格式（看服务器要求格式）
   x-www-form-urlencoded
+  将key:value通过qs转换
 */
 axios.defaults.headers['Content-Type'] =
   'application/x-www-form-urlencoded'

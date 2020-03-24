@@ -4,19 +4,34 @@ const hot = {
 }
 const loginByPhone = {
   url: '/login/cellphone',
-  type: 'get'
+  type: 'get',
+  req: true
 }
 const userInfo = {
   url: '/user/detail',
-  type: 'get'
+  type: 'get',
+  req: true
 }
 const searchList = {
-  url: '/search?keywords=',
-  type: 'get'
+  url: '/search',
+  type: 'get',
+  req: true
+}
+const musicList = {
+  url: '/top/playlist/highquality',
+  type: 'get',
+  req: true
+}
+const tagList = {
+  url: '/playlist/hot',
+  type: 'get',
+  req: true
 }
 export {
   hot as HOT,
   loginByPhone as LBP,
   userInfo as USERS,
-  searchList as SEARCHL
+  searchList as SEARCHL,
+  musicList as MUSLIST,
+  tagList as TAGLIST
 }

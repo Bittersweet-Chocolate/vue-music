@@ -15,15 +15,10 @@
         </div>
         <!-- 右 -->
         <div v-if="!userInfo.level">
-          <a
-            href="#"
-            @click="Login"
-            class="logo-button btn-qq fs-ssm px-3 text-grey"
-          >登录</a>
-          
+          <a href="#" @click="Login" class="logo-button btn-qq fs-ssm px-3 text-grey">登录</a>
         </div>
-        <div v-else class="flex-1 flex-right d-flex" >
-          <img  :src="userInfo.profile.avatarUrl"  width="23%">
+        <div v-else class="flex-1 flex-right d-flex">
+          <img :src="userInfo.profile.avatarUrl" width="23%" />
         </div>
       </div>
       <!-- tab栏 -->
@@ -33,13 +28,12 @@
       </div>
     </div>
     <!-- 路由占位符 使用过渡效果 -->
-    
+
     <transition mode="out-in">
       <keep-alive>
-      <router-view />
+        <router-view />
       </keep-alive>
     </transition>
-    
 
     <!-- 底部 -->
     <footer class="d-flex flex-column ai-center mt-5">
@@ -47,7 +41,7 @@
         <img src="../assets/img/logo_ch.svg" alt class="h-100" />
       </div>
       <div class="mt-2 text-grey fs-ssm text-center pb-5">
-        <p>Copyright © 1998 - 2019 Tencent. All Rights Reserved.</p>
+        <p>Copyright © 1998 - 2020 Tencent. All Rights Reserved.</p>
         <p>联系邮箱：810753596@qq.com QQ：810753596</p>
       </div>
     </footer>
@@ -56,7 +50,7 @@
 
 <script>
 import { MessageBox } from "mint-ui";
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 export default {
   data() {
     return {
@@ -64,14 +58,26 @@ export default {
     };
   },
   mounted() {
+    if (this.isMobile()) {
+    } else {
+    }
+    this.getTagListAction();
   },
   methods: {
     Login() {
       this.$router.push({ path: "/login" });
-    }
+    },
+
+    isMobile() {
+      let flag = navigator.userAgent.match(
+        /(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i
+      );
+      return flag;
+    },
+    ...mapActions(["getMusicListAction", "getTagListAction"])
   },
   computed: {
-    ...mapState(["userInfo"])
+    ...mapState(["userInfo", "tagList"])
   }
 };
 </script>

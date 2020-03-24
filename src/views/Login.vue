@@ -28,7 +28,11 @@ export default {
       try {
         const { account, code, message } = await this.$axios({
           methods: LBP.type,
-          url: LBP.url + `?phone=${this.phone}&password=${this.password}`
+          url: LBP.url,
+          params: {
+            phone: this.phone,
+            password: this.password
+          }
         });
         Indicator.close();
         if (code !== 200) {
@@ -39,22 +43,24 @@ export default {
           });
           return;
         }
+        // this.getUserInfoAction(account.id)
         this.$store.dispatch("getUserInfoAction", account.id);
         this.$router.push({ path: "/" });
       } catch (e) {
         Indicator.close();
         Toast({
-            message: "未知错误",
-            position: "center",
-            duration: 2000
-          });
+          message: "未知错误",
+          position: "center",
+          duration: 2000
+        });
         console.log(e);
       }
     },
     Back() {
       this.$router.push({ path: "/" });
-    }
-  }
+    },
+    
+  },
 };
 </script>
 <style lang="scss" scoped>
