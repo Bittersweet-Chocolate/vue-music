@@ -74,10 +74,14 @@ export default {
       }
     },
 
-    // 搜索详情
-    async handelSeachList(name) {
+    // 获取搜索
+    handelSeachList(name) {
       if (name.replace(/\s+/g, "").length === 0) return;
       Indicator.open("查询中...");
+      this.$utils._throttle(this.getSearchList(name), 1500);
+    },
+    // 搜索详情
+    async getSearchList(name) {
       try {
         const { result } = await this.$api.getSearchList({
           keywords: name,
@@ -99,6 +103,11 @@ export default {
       }
     },
 
+    // 清除搜索历史
+    clearSeacherList() {
+      this.getNameList = [];
+    },
+    
     // 获取历史信息
     getSearchHis() {
       let searchHis = localStorage.getItem("searchHis");

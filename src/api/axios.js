@@ -3,7 +3,7 @@ import qs from 'qs'
 axios.defaults.baseURL = 'http://musicapi.leanapp.cn'
 axios.defaults.timeoute = 10000
 // 允许携带cookie 凭证
-axios.defaults.withCredentials = true
+axios.defaults.withCredentials = false
 /*
   解决axios检查是否跨域发送两次请求问题
   设置请求传递数据的格式（看服务器要求格式）

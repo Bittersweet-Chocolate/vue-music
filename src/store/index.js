@@ -79,7 +79,7 @@ export default new Vuex.Store({
         }
         commit('getTagListMutaion', val.tags)
       })
-    }
+    },
 
   },
   modules: {}

@@ -13,7 +13,6 @@
   </div>
 </template>
 <script>
-import { LBP } from "@/api/index";
 import { Indicator, Toast } from "mint-ui";
 export default {
   data() {

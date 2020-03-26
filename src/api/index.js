@@ -39,6 +39,13 @@ const api = {
       url: '/playlist/hot',
       methos: 'get'
     })
+  },
+  getRankList(params) {
+    return axios({
+      url: '/top/list',
+      methos: 'get',
+      params: params
+    })
   }
 }
 export default api

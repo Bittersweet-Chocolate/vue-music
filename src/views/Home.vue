@@ -39,7 +39,7 @@
                 <img v-lazy="item.coverImgUrl" alt />
                 <div class="song-list-info px-2">
                   <i class="iconfont icon-bofangsanjiaoxing text-white fs-ssm"></i>
-                  <span class="fs-ssm text-white">{{item.playCount | toFix(2)}}</span>
+                  <span class="fs-ssm text-white">{{item.playCount | toFixNumber(2)}}</span>
                 </div>
               </div>
               <div class="text-grey mt-2">{{ item.name | subName(12) }}</div>
@@ -72,7 +72,7 @@ export default {
   },
   mounted() {
     // 获取歌曲和歌单名
-    this.getTagListAction();
+    if (this.tagList.length === 0) this.getTagListAction();
   },
   methods: {
     // 搜索操作
@@ -110,9 +110,9 @@ export default {
       this.searchName = name;
       this.searching = true;
     },
-    handleSearch:_throttle(function(){
-      this.$refs.ftos.handelSeachList(this.searchName)
-    },1000),
+    handleSearch() {
+      this.$refs.ftos.handelSeachList(this.searchName);
+    },
 
     // this.$refs.ftos.handelSeachList(this.searchName)
     ...mapActions(["getMusicListAction", "getTagListAction"]),
@@ -132,15 +132,12 @@ export default {
   watch: {
     // 监测搜索字
     searchName(val) {
-      val.length !== 0 ? (this.searching = true) : (this.searching = false);
+      val.length !== 0
+        ? (this.searching = true)
+        : ((this.searching = false), this.$refs.ftos.clearSeacherList());
     }
   },
   filters: {
-    // 播放数过滤
-    toFix(target, idx) {
-      if (10000 < target < 1000000) return (target / 10000).toFixed(idx) + "万";
-      return target;
-    },
     // 名称过滤
     subName(target, idx) {
       if (target.length > idx) return target.substr(0, idx) + "...";
