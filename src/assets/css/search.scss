@@ -1,0 +1,32 @@
+* {
+    list-style: none;
+}
+
+ul {
+    overflow: hidden;
+    margin-top: 0.5rem
+}
+
+.s-list {
+    padding-top: 0.5rem;
+    h3 {
+        font-size: 1rem;
+        font-weight: 10;
+    }
+    div {
+        span {
+            font-size: 0.6rem;
+            line-height: 2.16rem;
+            font-weight: 10;
+        }
+    }
+
+
+}
+
+.overText {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    word-break: normal;
+}

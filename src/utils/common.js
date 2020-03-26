@@ -1,47 +1,46 @@
-export default {
-  // 防抖
-  Debounce: function (fn, delay) {
-    let timer = null
-    return function () {
+// 防抖
+export function _debounce(fn, delay = 1000) {
+  var timer
+  return function () {
+    var th = this
+    var args = arguments
+    if (timer) {
       clearTimeout(timer)
-      const context = this
-      const args = arguments
-      timer = setTimeout(_ => {
-        fn.apply(context, args)
-      }, delay)
     }
-  },
-
-  // 节流
-  Throttle: function (fn, delay) {
-    let timer = null
-    let flag = false
-    return function () {
-      if (flag) return
-      clearTimeout(timer)
-      flag = true
-      const context = this
-      const args = arguments
-      timer = setTimeout(_ => {
-        flag = false
-        fn.apply(context, args)
-      }, delay)
-    }
-  },
-
-  // 随机数
-  getRandom: function (min, max, n) {
-    var arr = []
-    var random = 0
-    for (var i = 0; i < n; i++) {
-      random = Math.random() * (max - min) + min
-      random = Math.floor(random)
-      if (arr.indexOf(random) !== -1) {
-        i--
-        continue
-      }
-      arr.push(random)
-    }
-    return arr
+    timer = setTimeout(function () {
+      timer = null
+      fn.apply(th, args)
+    }, delay)
   }
+}
+// 节流
+export function _throttle(fn, interval = 1000) {
+  let timer = null
+  let flag = false
+  return function () {
+    if (flag) return
+    clearTimeout(timer)
+    const context = this
+    const args = arguments
+    timer = setTimeout(_ => {
+      flag = false
+      fn.apply(context, args)
+    }, interval)
+  }
+}
+
+// 随机数
+export function getRandom(min, max, n) {
+  var arr = []
+  var random = 0
+  for (var i = 0; i < n; i++) {
+    random = Math.random() * (max - min) + min
+    random = Math.floor(random)
+    if (arr.indexOf(random) !== -1) {
+      i--
+      continue
+    }
+    arr.push(random)
+  }
+  return arr
 }

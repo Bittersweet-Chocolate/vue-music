@@ -1,11 +1,9 @@
-<!-- card-list子组件 配合card组件使用最佳-->
 <template>
-  <!--这里使用m-card m-card需要的icon和title必须传递,而这个组件内没有,在从外界接收进来,传递给m-card -->
-  <m-card :icon="icon" :title="title">
+  <tag-card :icon="icon" :title="title">
     <!--使用m-card组件 在标签中添加的内容会被传递到m-card组件的插槽位置 -->
     <div class="nav jc-between">
       <div
-        class="nav-item "
+        class="nav-item"
         :class="{ active: active === index }"
         v-for="(item, index) in categories"
         :key="index"
@@ -25,7 +23,7 @@
         </swiper-slide>
       </swiper>
     </div>
-  </m-card>
+  </tag-card>
 </template>
 
 <script>
@@ -36,11 +34,11 @@ export default {
     icon: { type: String, required: true }, // m-crad用的数据
     categories: { type: Array, required: true } // m-list-crad循环用的数据
   },
-  data () {
+  data() {
     return {
-      active: 0 // 当前 索引等于active的值 就添加active类
-    }
+      active: 0
+    };
   }
-}
+};
 </script>
 <!--使用本组件需要的数据格式 为 数组 ['xx','xx'] -->

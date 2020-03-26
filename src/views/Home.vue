@@ -1,56 +1,32 @@
 <template>
-  <div class="home px-3" >
+  <div class="home px-3">
     <section class="pt-3 sea pb-1">
       <div>
         <i class="iconfont icon-sousuo" :class="{'pos-center':left_center,'pos-left':!left_center}"></i>
         <input
-          ref="searchRef"
-          type="text"
+          type="search"
           placeholder="搜索"
           class="py-2 search text-grey w-100"
           :style="searchText"
-          @click="handleSearch(1)"
+          @focus="handleInput(1)"
+          @keyup.13="handleSearch()"
           v-model="searchName"
         />
       </div>
-      <span class="ml-3" @click="handleSearch(0)" v-show="isSearch">取消</span>
+      <span class="ml-3" @click="handleInput(0)" v-show="isSearch">取消</span>
     </section>
 
-    <s-card-list v-show="!searchs">
-      <template>
-        <router-link v-for="data in searchList" :key="data.id" tag="a" to="/rank">
-          <div>
-            {{data.name}}
-            <div>{{data.artists[0].name}}--{{data.album.name}}</div>
-          </div>
-          <div></div>
-        </router-link>
-      </template>
-    </s-card-list>
+    <search-card
+      v-if="isSearch"
+      :searching="searching"
+      :getName="finalName"
+      @chooseSeach="chooseSeach($event)"
+      ref="ftos"
+    ></search-card>
 
-    <section v-show="isSearch && searchs">
-      <div class="searchBox">
-        <h4 class="mx-3 py-3">热门搜索</h4>
-        <div class="hot d-flex flex-wrap">
-          <a
-            href="#"
-            class="bg-white px-2 mr-2 py-1 mb-3 fs-sm text-grey"
-            v-for="(item,index) in hotList"
-            @click="handelSeachList(item.first)"
-            :key="index"
-          >{{item.first}}</a>
-        </div>
-      </div>
-    </section>
-
-    <mt-loadmore :top-method="loadTop" ref="loadmore">
-      <m-card
-        v-show="!isSearch"
-        v-for="data in musicList"
-        :key="data.tagId"
-        :title="data.tag"
-        href="#"
-      >
+    <!-- 显示 -->
+    <mt-loadmore :top-method="loadTop" ref="loadmore" v-else>
+      <tag-card v-for="data in musicList" :key="data.tagId" :title="data.tag" href="#">
         <div class="removeScroll">
           <div class="song-list d-flex" v-if="data.music.length!==0">
             <div
@@ -66,79 +42,54 @@
                   <span class="fs-ssm text-white">{{item.playCount | toFix(2)}}</span>
                 </div>
               </div>
-              <div  class="text-grey mt-2">{{ item.name | subName(12) }}</div>
+              <div class="text-grey mt-2">{{ item.name | subName(12) }}</div>
             </div>
           </div>
           <div v-else style="height:100%;width:100%">
             <span style="text-align:center;display:block;height:100%;line-height: 10;">该类型暂无数据</span>
           </div>
         </div>
-      </m-card>
+      </tag-card>
     </mt-loadmore>
   </div>
 </template>
 <script>
-import { HOT, SEARCHL } from "@/api/index";
-import { Indicator, Loadmore, Lazyload } from "mint-ui";
-import { mapActions, mapState, mapGetters } from "vuex";
+import { _throttle } from "@/utils/common";
+import { Lazyload } from "mint-ui";
+import { mapActions, mapState, mapMutations } from "vuex";
 export default {
   data() {
     return {
       // 搜索框状态
       isSearch: false,
-      searchs: true,
+      searching: false,
       searchText: "text-align:center",
       left_center: true,
-      // 最热搜索
-      hotList: [],
-      searchList: [],
-      searchName: ""
+      // 搜索名称
+      searchName: "",
+      finalName: ""
     };
   },
+  mounted() {
+    // 获取歌曲和歌单名
+    this.getTagListAction();
+  },
   methods: {
-    // 获取热搜信息
-    async getSearchHot() {
-      try {
-        const { result } = await this.$axios({
-          methods: HOT.type,
-          url: HOT.url
-        });
-        this.hotList = result.hots;
-      } catch (e) {
-        console.log(e);
-      }
-    },
-    // 搜索事件
-    handleSearch(idx) {
+    // 搜索操作
+    handleInput(idx) {
       if (idx === 1 && this.isSearch) return;
       if (idx === 0) {
         this.searchName = "";
         this.searchList = [];
+        this.searchText = "text-align:center";
+      }
+      if (idx === 1) {
+        this.searchText = "text-indent:35px";
       }
       this.isSearch = !this.isSearch;
-      this.searchText === "text-align:center"
-        ? (this.searchText = "text-indent:35px")
-        : (this.searchText = "text-align:center");
       this.left_center = !this.left_center;
     },
-    // 搜索详情
-    async handelSeachList(name) {
-      Indicator.open("查询中...");
-      this.searchName = name;
-      try {
-        const { result } = await this.$axios({
-          methods: SEARCHL.type,
-          url: SEARCHL.url,
-          params: {
-            keywords: this.searchName
-          }
-        });
-        this.searchList = result.songs;
-        Indicator.close();
-      } catch (e) {
-        console.log(e);
-      }
-    },
+    // 下拉事件
     loadTop() {
       this.refresh();
       this.$refs.loadmore.onTopLoaded();
@@ -154,19 +105,21 @@ export default {
         });
       }
     },
+    // search组件向父组件传值
+    chooseSeach(name = "") {
+      this.searchName = name;
+      this.searching = true;
+    },
+    handleSearch:_throttle(function(){
+      this.$refs.ftos.handelSeachList(this.searchName)
+    },1000),
 
-    ...mapActions(["getMusicListAction"])
-  },
-  mounted() {
-    // 获取最热
-    this.getSearchHot();
+    // this.$refs.ftos.handelSeachList(this.searchName)
+    ...mapActions(["getMusicListAction", "getTagListAction"]),
+    ...mapMutations(["setSearchHisMutaion"])
   },
   computed: {
-    // 获取查询列表
-    getSeachlist() {
-      debounce(this.handelSeachList, 1500);
-      return searchList;
-    },
+    // 获取vuex中state
     ...mapState({
       musicList: function(state) {
         return state.musicList;
@@ -177,12 +130,13 @@ export default {
     })
   },
   watch: {
+    // 监测搜索字
     searchName(val) {
-      val.length !== 0 ? (this.searchs = false) : (this.searchs = true);
+      val.length !== 0 ? (this.searching = true) : (this.searching = false);
     }
   },
   filters: {
-    // 点播数过滤
+    // 播放数过滤
     toFix(target, idx) {
       if (10000 < target < 1000000) return (target / 10000).toFixed(idx) + "万";
       return target;

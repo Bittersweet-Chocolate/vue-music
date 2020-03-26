@@ -1,14 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import axios from 'axios'
-import {
-  USERS,
-  MUSLIST,
-  TAGLIST
-} from '@/api/index'
-
+import api from '@/api/index'
 Vue.use(Vuex)
-
 export default new Vuex.Store({
   state: {
     userInfo: {},
@@ -40,13 +33,10 @@ export default new Vuex.Store({
     getUserInfoAction({
       commit
     }, value) {
-      axios({
-        url: USERS.url,
-        methods: USERS.type,
-        params: {
-          uid: value
-        }
-      }).then(val => {
+      const result = api.getUserInfo({
+        uid: value
+      })
+      result.then(val => {
         commit('getUserInfoMutaion', val)
       })
     },
@@ -59,15 +49,12 @@ export default new Vuex.Store({
       tag = '华语',
       tagId = 5001
     }) {
-      axios({
-        url: MUSLIST.url,
-        methods: MUSLIST.type,
-        params: {
-          limit: limit,
-          cat: tag,
-          order: 'hot'
-        }
-      }).then(val => {
+      const result = api.getMusicList({
+        limit: limit,
+        cat: tag,
+        order: 'hot'
+      })
+      result.then(val => {
         commit('getMusicListMutaion', {
           tag: tag,
           tagId: tagId,
@@ -81,10 +68,8 @@ export default new Vuex.Store({
       commit,
       dispatch
     }) {
-      axios({
-        url: TAGLIST.url,
-        methods: TAGLIST.type
-      }).then(val => {
+      const result = api.getTagList()
+      result.then(val => {
         for (let i = 0; i < 3; i++) {
           dispatch('getMusicListAction', {
             limit: 6,

@@ -30,9 +30,7 @@
     <!-- 路由占位符 使用过渡效果 -->
 
     <transition mode="out-in">
-      <keep-alive>
         <router-view />
-      </keep-alive>
     </transition>
 
     <!-- 底部 -->
@@ -61,23 +59,20 @@ export default {
     if (this.isMobile()) {
     } else {
     }
-    this.getTagListAction();
   },
   methods: {
     Login() {
       this.$router.push({ path: "/login" });
     },
-
     isMobile() {
       let flag = navigator.userAgent.match(
         /(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i
       );
       return flag;
     },
-    ...mapActions(["getMusicListAction", "getTagListAction"])
   },
   computed: {
-    ...mapState(["userInfo", "tagList"])
+    ...mapState(["userInfo"])
   }
 };
 </script>
