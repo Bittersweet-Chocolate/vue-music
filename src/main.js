@@ -20,6 +20,13 @@ Vue.prototype.$api = api
 Vue.prototype.$utils = utils
 Vue.use(MintUI)
 
+Vue.filter('formdata', function (value) {
+  const date = new Date(value)
+  const Y = date.getFullYear() + '-'
+  const M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-'
+  const D = date.getDate() + ' '
+  return Y + M + D
+})
 Vue.filter('toFixNumber', function (target, idx) {
   const k = 100000000
   if (target > k) {

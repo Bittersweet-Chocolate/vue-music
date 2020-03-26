@@ -5,7 +5,7 @@
       class="top d-flex bg-white mb-3"
       v-for="(item,index) in rankList"
       :key="index"
-      @click="musicIn(index)"
+      @click="musicTop(index)"
     >
       <!-- 左边区域 -->
       <div class="top-left py-3 pl-3 flex-1">
@@ -39,17 +39,17 @@ import { Lazyload } from "mint-ui";
 export default {
   data() {
     return {
-      rankList: []
+      rankList: [],
+      r_idx: 0,
+      r_len: 15
     };
   },
   mounted() {
-    this.getRank(10);
-    // if (this.rankList.length === 0) this.getRankListAction(3);
+    this.getRank();
   },
   methods: {
-    // ...mapActions(["getRankListAction"]),
     // 获取排名信息
-    getRank(idx) {
+    getRank() {
       let result = localStorage.getItem("rankList");
       if (result) {
         const time = new Date().getTime();
@@ -58,19 +58,20 @@ export default {
           this.rankList = result.data;
           return;
         }
+        localStorage.removeItem("rankList")
       }
-      this.getRankList(idx);
+      this.getRankList();
     },
-    async getRankList(idx = 10) {
+    async getRankList() {
+      let idx = this.r_idx;
+      let len = this.r_len;
       try {
-        for (let i = 0; i < idx; i++) {
+        for (; idx < len; idx++) {
           const result = await this.$api.getRankList({
-            idx: i
+            idx: idx
           });
           if (result.code === 200)
             this.rankList.push({
-              playlist: result.playlist.tracks,
-              description: result.playlist.description,
               coverImgUrl: result.playlist.coverImgUrl,
               name: result.playlist.name,
               top3: result.playlist.tracks.splice(0, 3),
@@ -81,9 +82,9 @@ export default {
         console.log(e);
       }
     },
-    // 路由跳转详情
-    musicIn(id) {
-      this.$router.push("/info/" + id);
+    // 路由跳转top详情
+    musicTop(id) {
+      this.$router.push({ name: "musicTop", params: { topId: id } });
     },
     // 添加排名的local
     setLocalRank() {
@@ -105,23 +106,5 @@ export default {
 };
 </script>
 <style lang="scss">
-/* @import url(); 引入css类 */
-ol li {
-  list-style: none;
-}
-.song-list-info {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  border-radius: 15px;
-  background-color: rgba(0, 0, 0, 0.4);
-}
-.top-content {
-  height: 7.6923rem;
-  position: relative;
-}
-.top {
-  border-radius: 10px;
-  overflow: hidden;
-}
+@import url(../assets/css/rank.scss);
 </style>

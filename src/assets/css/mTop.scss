@@ -1,0 +1,38 @@
+.logo {
+    height: 2.2rem;
+}
+
+.backRank {
+    border: 1px solid #ccc;
+    padding: 3px 15px;
+    border-radius: 15px;
+    font-size: 0.1rem;
+}
+
+.top-text {
+    font-size: 0.9rem;
+    position: relative;
+}
+
+.imgbox {
+    height: 11rem;
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.bofang {
+    height: 40px;
+    width: 160px;
+    background-color: #22d59c;
+    box-shadow: 0 6px 32px rgba(24, 213, 156, 0.5);
+    border-radius: 20px;
+    position: relative;
+}
+
+.bofang::before {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: #fff;
+}

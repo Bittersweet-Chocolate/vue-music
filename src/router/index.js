@@ -4,6 +4,9 @@ import Home from '@/views/Home'
 import Rank from '@/views/Rank'
 import Main from '@/views/Main'
 import Login from '@/views/Login'
+import Info from '@/views/Info'
+import MusicTop from '@/views/MusicTop'
+import MusicPlay from '@/views/MusicPlay'
 Vue.use(VueRouter)
 
 const routes = [{
@@ -19,13 +22,31 @@ const routes = [{
     component: Rank
   }]
 }, {
-  path: '*',
-  redirect: '/'
+  path: '/info/:infoId',
+  name: 'info',
+  component: Info,
+  props: true
+}, {
+  path: '/musicTop/:topId',
+  name: 'musicTop',
+  component: MusicTop,
+  props: true
 }, {
   path: '/login',
   name: 'login',
   component: Login
-}]
+},
+{
+  path: '/musicPlay/:id',
+  name: 'musicPlay',
+  component: MusicPlay,
+  props: true
+},
+{
+  path: '*',
+  redirect: '/'
+}
+]
 
 const router = new VueRouter({
   mode: 'hash',

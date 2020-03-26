@@ -19,19 +19,19 @@
     <search-card
       v-if="isSearch"
       :searching="searching"
-      :getName="finalName"
       @chooseSeach="chooseSeach($event)"
       ref="ftos"
     ></search-card>
 
     <!-- 显示 -->
     <mt-loadmore :top-method="loadTop" ref="loadmore" v-else>
-      <tag-card v-for="data in musicList" :key="data.tagId" :title="data.tag" href="#">
+      <div class="s-card">
+      <tag-card   v-for="data in musicList" :key="data.tagId" :title="data.tag" href="#">
         <div class="removeScroll">
           <div class="song-list d-flex" v-if="data.music.length!==0">
             <div
               v-for="(item, index) in data.music"
-              @click="musicPlay(item.id)"
+              @click="musicInfo(item.id)"
               :key="index"
               class="song-list-item mr-2 pb-4"
             >
@@ -50,6 +50,7 @@
           </div>
         </div>
       </tag-card>
+      </div>
     </mt-loadmore>
   </div>
 </template>
@@ -66,11 +67,10 @@ export default {
       searchText: "text-align:center",
       left_center: true,
       // 搜索名称
-      searchName: "",
-      finalName: ""
+      searchName: ""
     };
   },
-  mounted() {
+  created() {
     // 获取歌曲和歌单名
     if (this.tagList.length === 0) this.getTagListAction();
   },
@@ -114,7 +114,11 @@ export default {
       this.$refs.ftos.handelSeachList(this.searchName);
     },
 
-    // this.$refs.ftos.handelSeachList(this.searchName)
+    // 详情页跳转
+    musicInfo(id) {
+      console.log(id);
+      this.$router.push({ name: "info", params: { infoId: id } });
+    },
     ...mapActions(["getMusicListAction", "getTagListAction"]),
     ...mapMutations(["setSearchHisMutaion"])
   },

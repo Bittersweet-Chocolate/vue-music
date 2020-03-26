@@ -1,0 +1,20 @@
+ol li {
+    list-style: none;
+}
+.song-list-info {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    border-radius: 15px;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.top-content {
+    height: 7.6923rem;
+    position: relative;
+}
+
+.top {
+    border-radius: 10px;
+    overflow: hidden;
+}

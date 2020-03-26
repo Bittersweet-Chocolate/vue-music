@@ -41,7 +41,7 @@ export default {
       nothing: ""
     };
   },
-  props: ["getName", "searching"],
+  props: ["searching"],
   mounted() {
     // 获取最热
     this.getSearchHot();
@@ -87,7 +87,7 @@ export default {
           keywords: name,
           type: 1
         });
-        if (this.getName.length === 0) this.$emit("chooseSeach", name);
+        this.$emit("chooseSeach", name);
         this.getNameList = result.songs;
         if (this.searchHis.length > 5) this.searchHis.pop();
         if (this.searchHis.indexOf(name) === -1) this.searchHis.push(name);
