@@ -116,7 +116,6 @@ export default {
 
     // 详情页跳转
     musicInfo(id) {
-      console.log(id);
       this.$router.push({ name: "info", params: { infoId: id } });
     },
     ...mapActions(["getMusicListAction", "getTagListAction"]),

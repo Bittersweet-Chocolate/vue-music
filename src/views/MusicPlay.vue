@@ -7,19 +7,10 @@
         <img src="../assets/img/logo.svg" alt class="h-100" />
       </div>
       <div class="flex-1 pl-2 top-text">更多QQ音乐排行榜</div>
+      <transition enter-active-class="animated fadeIn" appear>
       <a class="backRank text-grey" @click="$router.go(-1)">返回</a>
+      </transition>
     </div>
-    <!-- <section class="d-flex p-3 ai-center bg-white shadow">
-      <div class="imgBox">
-        <img src="../assets/img/logo.svg" alt="" class="h-100">
-      </div>
-      <div class="px-3 flex-1">
-        <p class="fs-lg pb-1">你的好友</p>
-        <span class="text-grey ">在用QQ音乐邀你一起</span>
-      </div>
-      <div class="buttonDiv text-grey" @click="$router.go(-1)">返回</div>
-    </section>-->
-    <!-- 标题盒子 -->
     <section class="d-flex flex-column ai-center jc-center mt-4 text-center">
       <div class="title mb-3 mt-1">
         <h2 class="titleH pb-3">{{songsInfo.name}}</h2>
@@ -29,9 +20,11 @@
           :key="index"
         >{{data.name | addLines(songsInfo.ar,'hor')}}</span>
       </div>
+      <transition enter-active-class="animated flipInY" appear>
       <div class="titleimg box-shadow">
         <img v-lazy="songsInfo.url" alt class="h-100" />
       </div>
+      </transition>
       <div class="play mt-4 pt-1">
         <a href="#" class="iconfont icon-icon_xinyong_xianxing_jijin-"></a>
         <a href="#" class="iconfont icon-bofangsanjiaoxing" @click="startMusic" v-if="isStart"></a>
@@ -51,7 +44,6 @@
 <script>
 import { Lazyload, Indicator } from "mint-ui";
 export default {
-  props: ["id"],
   data() {
     return {
       musicUrl: "",
@@ -59,6 +51,7 @@ export default {
       songsInfo: {}
     };
   },
+  props: ["id"],
   mounted() {
     this.getMusicUrl();
     this.getMusicinfo();
@@ -95,6 +88,7 @@ export default {
 };
 </script>
 <style  scoped>
+@import url("../assets/css/animate.min.css");
 .buttonDiv {
   border: 1px solid #ccc;
   border-radius: 15px;

@@ -34,7 +34,7 @@
     </transition>
 
     <!-- 底部 -->
-    <footer class="d-flex flex-column ai-center mt-5">
+    <footer class="d-flex flex-column ai-center pt-5">
       <div class="fot">
         <img src="../assets/img/logo_ch.svg" alt class="h-100" />
       </div>

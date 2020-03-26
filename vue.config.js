@@ -9,7 +9,7 @@ module.exports = {
     proxy: {
       '/cgi-bin': {
         // 目标 API 地址
-        target: 'https://u.y.qq.com',
+        target: 'http://musicapi.leanapp.cn',
         changeOrigin: true
       }
     }

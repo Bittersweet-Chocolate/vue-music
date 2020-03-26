@@ -103,6 +103,7 @@ export default {
   },
   computed: {},
   beforeDestroy() {
+     Indicator.close();
     this.setLocalRank();
   }
 };
