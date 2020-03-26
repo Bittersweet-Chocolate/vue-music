@@ -39,6 +39,11 @@ Vue.filter('toFixNumber', function (target, idx) {
   }
 })
 
+Vue.filter('addLines', function (target, data, type) {
+  const line = type === 'hor' ? ' - ' : ' / '
+  return data[data.length - 1].name !== target ? target + line : target
+})
+
 Vue.component('tag-card', TagCard)
 Vue.component('tag-list', TagList)
 Vue.component('search-card', SearchCard)

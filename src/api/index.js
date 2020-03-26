@@ -50,18 +50,10 @@ const api = {
   // 播放歌曲
   getSong(params) {
     return axios({
-      url: '/song/url',
+      url: '/music/url',
       methos: 'get',
       params: params
     })
-  },
-  // 获取详情
-  getSongDetail(params) {
-    return axios({
-      url: '/song/url',
-      methos: 'get',
-      params: params
-    })
-  },
+  }
 }
 export default api

@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import { Lazyload } from "mint-ui";
+import { Lazyload, Indicator } from "mint-ui";
 export default {
   data() {
     return {
@@ -58,11 +58,12 @@ export default {
           this.rankList = result.data;
           return;
         }
-        localStorage.removeItem("rankList")
+        localStorage.removeItem("rankList");
       }
       this.getRankList();
     },
     async getRankList() {
+      Indicator.open("加载中...");
       let idx = this.r_idx;
       let len = this.r_len;
       try {
@@ -78,6 +79,7 @@ export default {
               playCount: result.playlist.playCount
             });
         }
+        Indicator.close();
       } catch (e) {
         console.log(e);
       }

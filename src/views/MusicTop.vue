@@ -26,8 +26,8 @@
         <li
           v-for="(item,index) in topInfo.tracks"
           :key="index"
-          class="d-flex p-3"
-          @click="playMusic(item.id)"
+          class="d-flex p-3 pb-2"
+          @click="playMusic(item.id,index)"
         >
           <span
             class="mr-3"
@@ -39,8 +39,8 @@
             <span
               v-for="(item1,index1) in item.ar"
               :key="index1"
-              class="text-grey pt-1"
-            >{{item1.name}}</span>
+              class="text-grey pt-1 fs-sssm"
+            >{{item1.name | addLines(item.ar)}}</span>
           </div>
         </li>
       </ol>
@@ -49,6 +49,7 @@
 </template>
 
 <script>
+import { Indicator } from "mint-ui";
 export default {
   data() {
     return {
@@ -62,13 +63,23 @@ export default {
   },
   methods: {
     async getMusicTop(idx) {
+      Indicator.open("加载中...");
       let res = await this.$api.getRankList({ idx: idx });
       if (res.code === 200) {
+        Indicator.close();
         this.topInfo = res.playlist;
       }
     },
-    playMusic(id) {
-      this.$router.push({name:"musicPlay",params:{id:id}}); // 点击歌曲详情进入播放页
+    playMusic(id, idx) {
+      const data = this.topInfo.tracks[idx];
+      const songInfo = {
+        name: data.name,
+        url: data.al.picUrl,
+        ar: data.ar
+      };
+      localStorage.setItem("songInfo", JSON.stringify(songInfo));
+      // 点击歌曲详情进入播放页
+      this.$router.push({ name: "musicPlay", params: { id: id } });
     }
   }
 };
