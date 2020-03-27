@@ -3,6 +3,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box; // c3盒模型
+    font-weight: 300;
 }
 
 html {
@@ -159,7 +160,7 @@ $value in $flex-ai {
 // 间距
 $spacing-type: ( // 类型
   m: margin,
-  p:padding);
+  p: padding);
 $spacing-direction:( // 方向
   t:top,
   r:right,
@@ -302,4 +303,16 @@ $border-color:#d4d9de;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+.delay-1{
+  animation-delay: 0.1s;
+}
+.delay-2{
+  animation-delay: 0.2s;
+}
+.delay-3{
+  animation-delay: 0.3s;
+}
+.delay-4{
+  animation-delay: 0.4s;
 }

@@ -1,3 +1,4 @@
+import { Toast } from 'mint-ui'
 const utils = {
   // 防抖
   _debounce(fn, delay = 1000) {
@@ -44,6 +45,13 @@ const utils = {
       arr.push(random)
     }
     return arr
+  },
+  getMore() {
+    Toast({
+      message: '还在开发ing',
+      position: 'center',
+      duration: 2000
+    })
   }
 }
 export default utils

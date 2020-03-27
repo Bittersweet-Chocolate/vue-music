@@ -90,7 +90,7 @@ export default {
     },
     // 添加排名的local
     setLocalRank() {
-      if (!localStorage.getItem("rankList")) {
+      if (this.rankList.length>8 && !localStorage.getItem("rankList")) {
         localStorage.setItem(
           "rankList",
           JSON.stringify({

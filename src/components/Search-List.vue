@@ -1,7 +1,7 @@
 <template>
   <section>
     <ul>
-      <li class="mx-3 s-list" v-for="data in searchList" :key="data.id">
+      <li class="mx-3 s-list" v-for="data in searchList" :key="data.id" @click="musicPlay(data.id)">
         <h3 class="overText">{{data.name}}</h3>
         <div class="overText">
           <span
@@ -21,6 +21,11 @@ export default {
     return {};
   },
   props: ["searchList"],
+  methods:{
+    musicPlay(id){
+      this.$router.push({ name: "musicPlay", params: { id: id } });
+    }
+  }
 };
 </script>
 <style lang="scss" scope>

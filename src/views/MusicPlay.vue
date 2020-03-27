@@ -8,7 +8,7 @@
       </div>
       <div class="flex-1 pl-2 top-text">更多QQ音乐排行榜</div>
       <transition enter-active-class="animated fadeIn" appear>
-      <a class="backRank text-grey" @click="$router.go(-1)">返回</a>
+        <a class="backRank text-grey" @click="$router.go(-1)">返回</a>
       </transition>
     </div>
     <section class="d-flex flex-column ai-center jc-center mt-4 text-center">
@@ -21,18 +21,18 @@
         >{{data.name | addLines(songsInfo.ar,'hor')}}</span>
       </div>
       <transition enter-active-class="animated flipInY" appear>
-      <div class="titleimg box-shadow">
-        <img v-lazy="songsInfo.url" alt class="h-100" />
-      </div>
+        <div class="titleimg box-shadow">
+          <img :src="songsInfo.picUrl" alt class="h-100" />
+        </div>
       </transition>
       <div class="play mt-4 pt-1">
-        <a href="#" class="iconfont icon-icon_xinyong_xianxing_jijin-"></a>
-        <a href="#" class="iconfont icon-bofangsanjiaoxing" @click="startMusic" v-if="isStart"></a>
-        <a href="#" class="iconfont icon-zanting" @click="stopMusic" v-else></a>
-        <a href="#" class="iconfont icon-aixin"></a>
+        <p class="iconfont icon-icon_xinyong_xianxing_jijin-" @click="this.$utils.getMore"></p>
+        <p class="iconfont icon-bofangsanjiaoxing" @click="startMusic" v-if="isStart"></p>
+        <p class="iconfont icon-zanting" @click="stopMusic" v-else></p>
+        <p class="iconfont icon-aixin" @click="this.$utils.getMore"></p>
       </div>
       <div class="pt-4 downMs">
-        <a href="#" class="bg-info">下载歌曲</a>
+        <p class="bg-info">下载歌曲</p>
       </div>
       <div>
         <audio :src="musicUrl" ref="audio"></audio>
@@ -53,8 +53,8 @@ export default {
   },
   props: ["id"],
   mounted() {
-    this.getMusicUrl();
     this.getMusicinfo();
+    this.getMusicUrl();
   },
   methods: {
     // 获取歌曲地址
@@ -74,11 +74,14 @@ export default {
     },
 
     // 获取歌曲图片 名称 信息
-    getMusicinfo() {
-      let res = localStorage.getItem("songInfo");
-      if (res) {
-        res = JSON.parse(res);
-        this.songsInfo = res;
+    async getMusicinfo() {
+      const res = await this.$api.getSongDetail({ ids: this.id });
+      if (res.code === 200) {
+        this.songsInfo = {
+          name: res.songs[0].name,
+          picUrl: res.songs[0].al.picUrl,
+          ar: res.songs[0].ar
+        };
       }
     }
   },
@@ -103,7 +106,7 @@ export default {
 .titleimg {
   height: 230px;
 }
-.play a {
+.play p {
   display: inline-block;
   width: 40px;
   height: 40px;
@@ -112,7 +115,7 @@ export default {
   position: relative;
   margin: 0 20px;
 }
-.play a::before {
+.play p::before {
   position: absolute;
   font-size: 20px;
   top: 50%;
@@ -120,7 +123,7 @@ export default {
   transform: translate(-50%, -50%);
 }
 
-.downMs a {
+.downMs p {
   display: block;
   height: 3rem;
   width: 18rem;

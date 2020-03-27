@@ -34,6 +34,13 @@ const api = {
       params: params
     })
   },
+  getMusicListDetail(params) {
+    return axios({
+      url: '/playlist/detail',
+      methos: 'get',
+      params: params
+    })
+  },
   getTagList() {
     return axios({
       url: '/playlist/hot',
@@ -43,6 +50,14 @@ const api = {
   getRankList(params) {
     return axios({
       url: '/top/list',
+      methos: 'get',
+      params: params
+    })
+  },
+  // 播放歌曲
+  getSongDetail(params) {
+    return axios({
+      url: '/song/detail',
       methos: 'get',
       params: params
     })

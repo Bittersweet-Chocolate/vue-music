@@ -1,6 +1,6 @@
 import axios from 'axios'
 import qs from 'qs'
-axios.defaults.baseURL = 'http://musicapi.leanapp.cn'
+axios.defaults.baseURL = 'https://musicapi.leanapp.cn'
 axios.defaults.timeoute = 10000
 // 允许携带cookie 凭证
 axios.defaults.withCredentials = false

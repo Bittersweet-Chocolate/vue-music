@@ -42,7 +42,7 @@
                   <span class="fs-ssm text-white">{{item.playCount | toFixNumber(2)}}</span>
                 </div>
               </div>
-              <div class="text-grey mt-2">{{ item.name | subName(12) }}</div>
+              <div class="text-grey mt-2" style="width:7.62rem">{{ item.name | subName(12) }}</div>
             </div>
           </div>
           <div v-else style="height:100%;width:100%">
