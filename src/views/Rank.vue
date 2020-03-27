@@ -1,11 +1,16 @@
 <!--排行页面  -->
 <template>
   <div class="p-3 mt-2">
+    <transition-group
+        enter-active-class="animated bounce"
+        v-on:before-enter="beforeEnter"
+      >
     <div
       class="top d-flex bg-white mb-3"
       v-for="(item,index) in rankList"
       :key="index"
       @click="musicTop(index)"
+      :data-index="index"
     >
       <!-- 左边区域 -->
       <div class="top-left py-3 pl-3 flex-1">
@@ -31,6 +36,7 @@
         </div>
       </div>
     </div>
+    </transition-group>
   </div>
 </template>
 
@@ -99,7 +105,11 @@ export default {
           })
         );
       }
-    }
+    },
+    beforeEnter (el) {
+      let delayNum = "." + el.dataset.index * 100 + "s";
+      el.style.animationDelay = delayNum;
+    },
   },
   computed: {},
   beforeDestroy() {

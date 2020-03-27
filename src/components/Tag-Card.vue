@@ -17,7 +17,6 @@ export default {
   props: {
     // 接收父组件传递过来的值 一般形式是props:[title,icon]
     title: { type: String, required: true }, // 这里规定传递过来的类型必须为字符串,是必传字段
-    href: { type: String, required: true }
   },
   methods: {
 

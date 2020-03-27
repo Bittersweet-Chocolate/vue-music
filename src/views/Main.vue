@@ -21,17 +21,16 @@
           <img :src="userInfo.profile.avatarUrl" width="23%" />
         </div>
       </div>
-      <!-- tab栏 -->
+      <!-- tablebar -->
       <div class="nav d-flex fs-lg text-grey text-center">
         <router-link tag="div" to="/" exact-active-class="active">推荐</router-link>
         <router-link tag="div" to="/rank" exact-active-class="active">排行</router-link>
       </div>
     </div>
-    <!-- 路由占位符 使用过渡效果 -->
 
-    <transition mode="out-in">
+    <!-- <transition enter-active-class="animated flipInY"> -->
         <router-view />
-    </transition>
+    <!-- </transition> -->
 
     <!-- 底部 -->
     <footer class="d-flex flex-column ai-center pt-5">

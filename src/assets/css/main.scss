@@ -1,22 +1,3 @@
-// Main路由页面样式
-.v-enter{
-  opacity: 0;
- }
- .v-enter-active{
-  transition: 0.2s;
- }
- .v-enter-to{
-  opacity: 1;
- }
- .v-leave{
-  opacity: 1;
- }
- .v-leave-to{
-  opacity:0;
- }
- .v-leave-active{
-  transition: 0.2s;
- }
  // logo
  .header {
    background-color: #fafafa;

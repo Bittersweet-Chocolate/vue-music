@@ -43,13 +43,17 @@
         </div>
       </div>
     </div>
-    <ol>
+     <transition-group
+        enter-active-class="animated bounceInLeft"
+        @before-enter="beforeEnter"
+      >
       <li
         class="p-4 pb-2 pt-3"
         :style="musName===(data.name)?'color:#31c27c':null"
         v-for="(data,index) in tracks"
         :key="data.id"
         @click="chooseMusic(index,data.id)"
+        :data-index="index"
       >
         <div>
           <span class="text-ellipsis">{{data.name}}</span>
@@ -62,7 +66,7 @@
           >{{items.name | addLines(data.ar)}}</span>
         </div>
       </li>
-    </ol>
+     </transition-group>
     <div>
       <audio :src="musicUrl" ref="audio" @ended="startNext"></audio>
     </div>
@@ -157,6 +161,10 @@ export default {
     // 返回
     goBlack() {
       this.$router.push({ path: "/" });
+    },
+    beforeEnter(el) {
+      let delayNum = "." + el.dataset.index * 100 + "s";
+      el.style.animationDelay = delayNum;
     }
   },
   beforeDestroy() {

@@ -22,21 +22,23 @@
     </section>
     <section class="px-3 pt-3">
       <p class="text-grey fs-sssm">排行榜 共{{topInfo.trackCount}}首</p>
-      <ol>
-        <!-- <transition-group enter-active-class="animated flash" appear> -->
+      <transition-group
+        enter-active-class="animated bounceInLeft"
+        @before-enter="beforeEnter"
+      >
         <li
           v-for="(item,index) in topInfo.tracks"
           :key="index"
           class="d-flex p-3 pb-2"
           @click="playMusic(item.id,index)"
           :style="delay"
+          :data-index="index"
         >
-          
-            <span
-              class="mr-3"
-              :class="index<3?'text-chinaRed':'text-grey'"
-              style="padding-top:0.1rem"
-            >{{index+1}}</span>
+          <span
+            class="mr-3"
+            :class="index<3?'text-chinaRed':'text-grey'"
+            style="padding-top:0.1rem"
+          >{{index+1}}</span>
           <div>
             <p>{{item.name}}</p>
             <span
@@ -46,8 +48,7 @@
             >{{item1.name | addLines(item.ar)}}</span>
           </div>
         </li>
-        <!-- </transition-group> -->
-      </ol>
+      </transition-group>
     </section>
   </div>
 </template>
@@ -59,7 +60,7 @@ export default {
     return {
       topInfo: {},
       color: "text-chinaRed",
-      delay:"animated-delay:2s"
+      delay: "animated-delay:2s"
     };
   },
   props: ["topId"],
@@ -78,12 +79,12 @@ export default {
     playMusic(id, idx) {
       // 点击歌曲详情进入播放页
       this.$router.push({ name: "musicPlay", params: { id: id } });
-    }
-  },
-  computed:{
-    // delay(idx){
-    //   return `animate-delay:${idx}s`
-    // }
+    },
+    // 动画绑定延时 0.1
+    beforeEnter (el) {
+      let delayNum = "." + el.dataset.index * 100 + "s";
+      el.style.animationDelay = delayNum;
+    },
   }
 };
 </script>
