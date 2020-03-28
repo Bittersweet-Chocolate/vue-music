@@ -16,10 +16,10 @@
       <div class="top-left py-3 pl-3 flex-1">
         <h3 class="pb-2">{{item.name}}</h3>
         <ol>
-          <li v-for="(item1,index1) in item.top3  " :key="index1">
+          <li v-for="(top,topIdx) in item.top3  " :key="top.id">
             <p class="text-grey fs-ssm">
-              <strong class="text-black">{{index1 + 1+'.'}}</strong>
-              {{item1.name}}
+              <strong class="text-black">{{topIdx + 1+'.'}}</strong>
+              {{top.name}}
             </p>
           </li>
         </ol>

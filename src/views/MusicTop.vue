@@ -28,7 +28,7 @@
       >
         <li
           v-for="(item,index) in topInfo.tracks"
-          :key="index"
+          :key="item.id"
           class="d-flex p-3 pb-2"
           @click="playMusic(item.id,index)"
           :style="delay"

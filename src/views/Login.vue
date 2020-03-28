@@ -7,7 +7,7 @@
         <mt-button type="primary" size="small" @click="Login">登录</mt-button>
       </div>
       <div class="login-bt">
-        <mt-button type="danger" size="small">返回</mt-button>
+        <mt-button type="danger" size="small" @click="Back">返回</mt-button>
       </div>
     </div>
   </div>
