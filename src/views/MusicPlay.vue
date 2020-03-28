@@ -117,7 +117,6 @@ export default {
 };
 </script>
 <style  scoped>
-@import url("../assets/css/animate.min.css");
 .buttonDiv {
   border: 1px solid #ccc;
   border-radius: 15px;

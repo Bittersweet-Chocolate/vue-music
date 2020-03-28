@@ -15,7 +15,7 @@
         </div>
         <!-- 右 -->
         <div v-if="!userInfo.level">
-          <a href="#" @click="Login" class="logo-button btn-qq fs-ssm px-3 text-grey">登录</a>
+          <router-link to="/login" tag="a"  class="logo-button btn-qq fs-ssm px-3 text-grey">登录</router-link>
         </div>
         <div v-else class="flex-1 flex-right d-flex">
           <img :src="userInfo.profile.avatarUrl" width="23%" />
@@ -29,8 +29,18 @@
     </div>
 
     <!-- <transition enter-active-class="animated flipInY"> -->
-        <router-view />
+    <router-view />
     <!-- </transition> -->
+    <mt-popup 
+    v-model="popupVisible" 
+    popup-transition="popup-fade"
+    >
+    <div class="p-2" style="text-align:center;">
+      <h4 class="mb-2">手机体验更佳！</h4>
+      <span class="text-grey fs-sm">可以使用手机浏览器扫码</span>
+    </div>
+    <img src="../assets/img/showPhone.png" width="200px" height="200px"/>
+    </mt-popup>
 
     <!-- 底部 -->
     <footer class="d-flex flex-column ai-center pt-5">
@@ -51,24 +61,21 @@ import { mapState, mapActions } from "vuex";
 export default {
   data() {
     return {
-      current: 0
+      popupVisible: false
     };
   },
   mounted() {
-    if (this.isMobile()) {
-    } else {
+    if (!this.isMobile()) {
+      this.popupVisible = true;
     }
   },
   methods: {
-    Login() {
-      this.$router.push({ path: "/login" });
-    },
     isMobile() {
       let flag = navigator.userAgent.match(
         /(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS|Symbian|Windows Phone)/i
       );
       return flag;
-    },
+    }
   },
   computed: {
     ...mapState(["userInfo"])

@@ -4,6 +4,7 @@ import router from './router'
 import store from './store'
 import './assets/font/iconfont.css'
 import './assets/css/style.scss'
+import './assets/css/animate.min.css'
 
 import api from '@/api/index'
 import utils from '@/utils/common'

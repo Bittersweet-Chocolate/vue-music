@@ -89,8 +89,8 @@ export default {
         });
         this.$emit("chooseSeach", name);
         this.getNameList = result.songs;
-        if (this.searchHis.length > 5) this.searchHis.pop();
-        if (this.searchHis.indexOf(name) === -1) this.searchHis.push(name);
+        if (this.searchHis.length > 6) this.searchHis.pop();
+        if (this.searchHis.indexOf(name) === -1) this.searchHis.unshift(name);
         Indicator.close();
       } catch (e) {
         Indicator.close();

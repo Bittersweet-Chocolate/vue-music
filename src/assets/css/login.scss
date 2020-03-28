@@ -1,8 +1,82 @@
 .login {
+    width: 100%;
+    height: 100%;
+    margin: 0 auto;
     display: flex;
-    .login-bt {
-        flex: 1;
+    flex-direction: column;
+}
+
+.login-navBar {
+    height: 44px;
+    position: relative;
+    display: flex;
+    background: none;
+    z-index: 102;
+
+    .navBar-icon {
+        flex: 0 0 25%;
+        padding: 0 0.9rem;
         display: flex;
-        justify-content:center
+        align-items: center;
+        color: white;
+        font-size: 20px
+    }
+}
+
+.login-scrollView {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    margin-top: -44px;
+
+    img {
+        width: 100%;
+        height: auto;
+        display: block;
+        border: 0;
+    }
+
+    .login-form {
+        background: #fff;
+        border-radius: 5px;
+        width: 92%;
+        margin: -8rem auto 4rem;
+        position: absolute;
+        left: 4%;
+        padding: 1.8rem 1.8rem 4rem 1.8rem;
+        animation-delay: 0.5s;
+    }
+}
+
+.login-bt {
+    margin-top: 1.2rem;
+
+    .bt-green {
+        background: -webkit-linear-gradient(left, #eae5c9, #6cc6cb);
+        background: -o-linear-gradient(right, #eae5c9, #6cc6cb);
+        background: -moz-linear-gradient(right, #eae5c9, #6cc6cb);
+        background: linear-gradient(to right, #eae5c9, #6cc6cb);
+        color: white;
+        box-shadow: 0 5px 9px rgb(111, 190, 194);
+        border-radius: 22px;
+    }
+}
+
+.login-ch {
+    width: 60%;
+    position: absolute;
+    left: 50%;
+    margin-left: -28%;
+    bottom: 10%;
+
+    span {
+        flex: 1;
+        width: 100%;
+        min-height: 1rem;
+        color: hsl(346, 89%, 53%);
+        text-align: justify;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 }

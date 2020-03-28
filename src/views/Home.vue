@@ -150,7 +150,7 @@ export default {
     searchName(val) {
       val.length !== 0
         ? (this.searching = true)
-        : ((this.searching = false), this.$refs.ftos.clearSeacherList());
+        : ((this.searching = false), this.$refs.sch.clearSeacherList());
     }
   },
   filters: {
