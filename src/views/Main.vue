@@ -62,7 +62,7 @@ export default {
     };
   },
   mounted() {
-    // this.showImg();
+    this.showImg();
   },
   methods: {
     showImg() {
