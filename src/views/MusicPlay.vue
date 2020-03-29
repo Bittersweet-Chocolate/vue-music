@@ -33,25 +33,25 @@
         <p class="iconfont icon-aixin" @click="this.$utils.getMore"></p>
       </div>
       <div class="pt-4 downMs">
-        <a class="bg-info" :href="musicUrl" @click.prevent="downMusic(musicUrl)">下载歌曲</a>
-        <!-- <a class="bg-info" :href="musicUrl" download>下载歌曲</a> -->
+        <a class="bg-info" @click="downMusic">下载歌曲</a>
       </div>
       <div>
-        <audio :src="musicUrl" ref="audio" ></audio>
+        <audio :src="musicUrl" ref="audio"></audio>
       </div>
     </section>
   </div>
 </template>
 
 <script>
-import { Lazyload, Indicator , Toast} from "mint-ui";
+import { Lazyload, Indicator, Toast } from "mint-ui";
 import Axios from "axios";
 export default {
   data() {
     return {
       musicUrl: "",
       isStart: true,
-      songsInfo: {}
+      songsInfo: {},
+      downLink:null
     };
   },
   props: ["id"],
@@ -69,13 +69,13 @@ export default {
     // 控制播放
     startMusic() {
       const res = this.$refs.audio.error;
-      if(res){
+      if (res) {
         Toast({
-          message:"歌曲,暂无资源",
-          position:"center",
+          message: "歌曲,暂无资源",
+          position: "center",
           duration: 2000
-        })
-        return ;
+        });
+        return;
       }
       this.isStart = false;
       this.$refs.audio.play();
@@ -94,25 +94,28 @@ export default {
           picUrl: res.songs[0].al.picUrl,
           ar: res.songs[0].ar
         };
+        this.downName = this.songsInfo.name + ".mp3";
       }
     },
     // 下载歌曲
-    downMusic(url) {
-      Axios.get(url, { responseType: "blob" }).then(res => {
-        // 为了简单起见这里blob的mime类型 固定写死了
-        console.log(res);
-        let blob = new Blob([data]);
-        console.log(blob);
-        // let link = document.createElement("a");
-        // link.href = window.URL.createObjectURL(blob);
-        // link.download = this.songsInfo.name+'.mp3';
-        // link.click();
+    downMusic() {
+      if(this.downLink){
+        this.downLink.click()
+        return
+      }
+      const res = this.$api.downMusic(this.musicUrl);
+      res.then(val => {
+        // 新建node节点存放当前 url
+        let fileName = this.songsInfo.name;
+        let blob = new Blob([val]);
+        let fileUrl = window.URL.createObjectURL(blob);
+        this.downLink = document.createElement("a");
+        this.downLink .href = window.URL.createObjectURL(blob);
+        this.downLink .download = fileName + ".mp3";
+        this.downLink .click();
+        console.log(this.downLink)
       });
     }
-  },
-
-  beforeDestroy() {
-    localStorage.removeItem("songInfo");
   }
 };
 </script>

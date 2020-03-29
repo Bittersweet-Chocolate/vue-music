@@ -31,7 +31,6 @@
           :key="item.id"
           class="d-flex p-3 pb-2"
           @click="playMusic(item.id,index)"
-          :style="delay"
           :data-index="index"
         >
           <span
@@ -60,7 +59,6 @@ export default {
     return {
       topInfo: {},
       color: "text-chinaRed",
-      delay: "animated-delay:2s"
     };
   },
   props: ["topId"],

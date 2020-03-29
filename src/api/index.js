@@ -69,6 +69,12 @@ const api = {
       methos: 'get',
       params: params
     })
+  },
+  // 歌曲下载
+  downMusic(url) {
+    return axios.get(url, {
+      responseType: 'blob'
+    })
   }
 }
 export default api
