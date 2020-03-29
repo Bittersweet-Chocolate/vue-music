@@ -13,6 +13,7 @@ import TagCard from '@/components/Tag-Card'
 import TagList from '@/components/Tag-List'
 import SearchCard from '@/components/Search-Card'
 import SearchList from '@/components/Search-List'
+import LoginCard from '@/components/Login-Card'
 // 引入 mint-ui
 import MintUI from 'mint-ui'
 import 'mint-ui/lib/style.css'
@@ -49,6 +50,7 @@ Vue.component('tag-card', TagCard)
 Vue.component('tag-list', TagList)
 Vue.component('search-card', SearchCard)
 Vue.component('search-list', SearchList)
+Vue.component('login-card', LoginCard)
 
 Vue.config.productionTip = false
 

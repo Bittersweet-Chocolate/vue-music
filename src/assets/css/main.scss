@@ -1,35 +1,41 @@
  // logo
  .header {
    background-color: #fafafa;
-   position:sticky;
-   top:0;
+   position: sticky;
+   top: 0;
    z-index: 99;
  }
+
  .logo-box {
    height: 2.5385rem;
    background-color: #fff;
    padding: 3px;
-   img{
+
+   img {
      height: 100%;
    }
  }
+
  .btn-qq {
    border: 1px solid #ccc;
    padding: 5px 25px;
    border-radius: 15px;
  }
+
  // tab
  .nav {
    div {
      width: 50%;
-     height:3.2308rem ;
-     line-height: 3.2308rem ;
+     height: 3.2308rem;
+     line-height: 3.2308rem;
      position: relative;
    }
-   .active{
-     color: rgba(34,213,156,1);
+
+   .active {
+     color: rgba(34, 213, 156, 1);
    }
-   .active::after{
+
+   .active::after {
      content: "";
      position: absolute;
      bottom: 0;
@@ -40,4 +46,14 @@
      border-radius: .3rem;
      background: currentColor;
    }
+ }
+
+ .popup {
+   padding: 1.8rem;
+   position: relative;
+   z-index: 10;
+   margin: -4px 16px 10px;
+ }
+ .mint-popup{
+   background: none!important
  }

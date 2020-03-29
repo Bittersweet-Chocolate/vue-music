@@ -6,7 +6,7 @@ const api = {
       methos: 'get'
     })
   },
-  loginByPhonefunction(params) {
+  login(params) {
     return axios({
       url: '/login/cellphone',
       methos: 'get',
