@@ -63,7 +63,7 @@ export default {
     // 获取歌曲地址
     async getMusicUrl() {
       const res = await this.$api.getSong({ id: this.id });
-      this.musicUrl = res.data[0].url;
+      this.musicUrl = res.data[0].url.replace('http://','https://');
     },
 
     // 控制播放

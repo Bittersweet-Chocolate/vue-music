@@ -2,7 +2,7 @@
   <div>
     <header class="top_wrap">
       <div class="top_wrap__bd"></div>
-      <img class="top_wrap__bg" :src="playListInfo.coverImgUrl" />
+      <img class="top_wrap__bg" :src="playListInfo.coverImgUrl | getImg" />
     </header>
     <div class="opt_box">
       <div class="js_author author">
@@ -165,6 +165,11 @@ export default {
     beforeEnter(el) {
       let delayNum = "." + el.dataset.index * 100 + "s";
       el.style.animationDelay = delayNum;
+    }
+  },
+  filters:{
+    getImg(target){
+      return target+"?param400y280"
     }
   },
   beforeDestroy() {
